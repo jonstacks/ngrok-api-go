@@ -9,12 +9,17 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"runtime"
 
 	"github.com/ngrok/ngrok-api-go/v4"
 )
 
 const (
 	apiVersion = "2"
+)
+
+var (
+	defaultUserAgent = "ngrok-api-go/" + Version + "/" + runtime.Version()
 )
 
 type Client struct {
@@ -52,7 +57,7 @@ func (c *Client) buildRequest(ctx context.Context, method string, reqURL *url.UR
 	}
 
 	r.Header.Set("authorization", fmt.Sprintf("Bearer %s", c.cfg.APIKey))
-	r.Header.Set("user-agent", "github.com/ngrok/ngrok-api-go/v4")
+	r.Header.Set("user-agent", c.userAgent())
 	r.Header.Set("ngrok-version", apiVersion)
 	if body != nil {
 		r.Header.Set("content-type", "application/json")
@@ -118,4 +123,13 @@ func (c *Client) buildUnmarshalError(resp *http.Response, bodyBytes []byte, err 
 			"operation_id":    resp.Header.Get("ngrok-operation-id"),
 		},
 	}
+}
+
+// Returns a user agent override if one was set on the client config. Otherwise,
+// returns the default user agent.
+func (c *Client) userAgent() string {
+	if c.cfg.UserAgent != nil {
+		return *c.cfg.UserAgent
+	}
+	return defaultUserAgent
 }
