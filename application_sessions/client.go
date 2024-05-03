@@ -141,8 +141,11 @@ func (it *Iter) Next(ctx context.Context) bool {
 
 	// is there an available item?
 	if it.n < len(it.items) {
-		it.lastItemID = ngrok.String(it.Item().ID)
 		return true
+	}
+
+	if len(it.items) > 0 && it.lastItemID == nil {
+		return false
 	}
 
 	// fetch the next page
@@ -158,6 +161,24 @@ func (it *Iter) Next(ctx context.Context) bool {
 	// page with zero items means there are no more
 	if len(resp.ApplicationSessions) == 0 {
 		return false
+	}
+
+	if resp.NextPageURI == nil {
+		it.lastItemID = nil
+	} else {
+		u, err := url.Parse(*resp.NextPageURI)
+		if err != nil {
+			it.err = err
+			return false
+		}
+		m, err := url.ParseQuery(u.RawQuery)
+		if err != nil {
+			it.err = err
+			return false
+		}
+		if lastItemID := m.Get("before_id"); lastItemID != "" {
+			it.lastItemID = &lastItemID
+		}
 	}
 
 	it.n = -1
