@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"fmt"
 	"text/tabwriter"
+	"net/url"
 )
 
 type Empty struct {
@@ -53,6 +54,21 @@ func (x *Paging) String() string {
 	return x.GoString()
 }
 
+func (x Paging) URLValues() url.Values {
+	var vals url.Values
+	
+	if x.BeforeID != nil {
+		vals.Set("before_id", *x.BeforeID)
+	}
+	
+	if x.Limit != nil {
+		vals.Set("limit", *x.Limit)
+	} else {
+		vals.Set("limit", "20")
+	}
+
+	return vals
+}
 func (x *Paging) GoString() string {
 	var b bytes.Buffer
 	fmt.Fprintf(&b, "Paging {\n")
@@ -5393,6 +5409,14 @@ func (x *ReservedDomainList) GoString() string {
 	tw.Flush()
 	fmt.Fprintf(&b, "}\n")
 	return b.String()
+}
+
+func (x ReservedDomainList) Items() []ReservedDomain {
+	return x.ReservedDomains
+}
+
+func (x ReservedDomainList) NextPage() *string {
+	return x.NextPageURI
 }
 
 type ReservedDomainCertPolicy struct {
