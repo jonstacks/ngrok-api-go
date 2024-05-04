@@ -3,6 +3,7 @@
 package reserved_domains
 
 import (
+	"fmt"
 	"bytes"
 	"context"
 	"net/url"
@@ -167,6 +168,7 @@ func (it *Iter) Next(ctx context.Context) bool {
 	// parse the next page URI as soon as we get it and store it
 	// so we can use it on the next fetch
 	if resp.NextPageURI != nil {
+		fmt.Printf("resp.NextPageURI: %s\n", *resp.NextPageURI)
 		it.nextPage, it.err = url.Parse(*resp.NextPageURI)
 		if it.err != nil {
 			return false
