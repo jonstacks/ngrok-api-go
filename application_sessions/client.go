@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 type Client struct {
@@ -23,7 +23,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Get an application session by ID.
 //
-// https://ngrok.com/docs/api#api-application-sessions-get
+// https://ngrok.com/docs/api-reference/applicationsessions/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.ApplicationSession, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -47,7 +47,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.ApplicationSession,
 
 // Delete an application session by ID.
 //
-// https://ngrok.com/docs/api#api-application-sessions-delete
+// https://ngrok.com/docs/api-reference/applicationsessions/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -70,7 +70,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // List all application sessions for this account.
 //
-// https://ngrok.com/docs/api#api-application-sessions-list
+// https://ngrok.com/docs/api-reference/applicationsessions/list
 func (c *Client) List(paging *ngrok.Paging) ngrok.Iter[*ngrok.ApplicationSession] {
 	if paging == nil {
 		paging = new(ngrok.Paging)

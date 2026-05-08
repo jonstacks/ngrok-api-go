@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // TLS Certificates are pairs of x509 certificates and their matching private
@@ -29,7 +29,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Upload a new TLS certificate
 //
-// https://ngrok.com/docs/api#api-tls-certificates-create
+// https://ngrok.com/docs/api-reference/tlscertificates/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.TLSCertificateCreate) (*ngrok.TLSCertificate, error) {
 	var res ngrok.TLSCertificate
 	var path bytes.Buffer
@@ -51,7 +51,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.TLSCertificateCreate) (*
 
 // Delete a TLS certificate
 //
-// https://ngrok.com/docs/api#api-tls-certificates-delete
+// https://ngrok.com/docs/api-reference/tlscertificates/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -74,7 +74,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get detailed information about a TLS certificate
 //
-// https://ngrok.com/docs/api#api-tls-certificates-get
+// https://ngrok.com/docs/api-reference/tlscertificates/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.TLSCertificate, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -98,7 +98,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.TLSCertificate, err
 
 // List all TLS certificates on this account
 //
-// https://ngrok.com/docs/api#api-tls-certificates-list
+// https://ngrok.com/docs/api-reference/tlscertificates/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.TLSCertificate] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)
@@ -202,7 +202,7 @@ func (it *iterList) Err() error {
 
 // Update attributes of a TLS Certificate by ID
 //
-// https://ngrok.com/docs/api#api-tls-certificates-update
+// https://ngrok.com/docs/api-reference/tlscertificates/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.TLSCertificateUpdate) (*ngrok.TLSCertificate, error) {
 	if arg == nil {
 		arg = new(ngrok.TLSCertificateUpdate)

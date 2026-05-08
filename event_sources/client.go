@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 type Client struct {
@@ -23,7 +23,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Add an additional type for which this event subscription will trigger
 //
-// https://ngrok.com/docs/api#api-event-sources-create
+// https://ngrok.com/docs/api-reference/eventsources/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.EventSourceCreate) (*ngrok.EventSource, error) {
 	if arg == nil {
 		arg = new(ngrok.EventSourceCreate)
@@ -49,7 +49,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.EventSourceCreate) (*ngr
 
 // Remove a type for which this event subscription will trigger
 //
-// https://ngrok.com/docs/api#api-event-sources-delete
+// https://ngrok.com/docs/api-reference/eventsources/delete
 func (c *Client) Delete(ctx context.Context, arg *ngrok.EventSourceItem) error {
 	if arg == nil {
 		arg = new(ngrok.EventSourceItem)
@@ -74,7 +74,7 @@ func (c *Client) Delete(ctx context.Context, arg *ngrok.EventSourceItem) error {
 
 // Get the details for a given type that triggers for the given event subscription
 //
-// https://ngrok.com/docs/api#api-event-sources-get
+// https://ngrok.com/docs/api-reference/eventsources/get
 func (c *Client) Get(ctx context.Context, arg *ngrok.EventSourceItem) (*ngrok.EventSource, error) {
 	if arg == nil {
 		arg = new(ngrok.EventSourceItem)
@@ -100,7 +100,7 @@ func (c *Client) Get(ctx context.Context, arg *ngrok.EventSourceItem) (*ngrok.Ev
 
 // List the types for which this event subscription will trigger
 //
-// https://ngrok.com/docs/api#api-event-sources-list
+// https://ngrok.com/docs/api-reference/eventsources/list
 func (c *Client) List(ctx context.Context, subscriptionId string) (*ngrok.EventSourceList, error) {
 	arg := &ngrok.EventSourcePaging{SubscriptionID: subscriptionId}
 
@@ -124,7 +124,7 @@ func (c *Client) List(ctx context.Context, subscriptionId string) (*ngrok.EventS
 
 // Update the type for which this event subscription will trigger
 //
-// https://ngrok.com/docs/api#api-event-sources-update
+// https://ngrok.com/docs/api-reference/eventsources/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.EventSourceUpdate) (*ngrok.EventSource, error) {
 	if arg == nil {
 		arg = new(ngrok.EventSourceUpdate)

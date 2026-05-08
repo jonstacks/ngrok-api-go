@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // An SSH Certificate Authority is a pair of an SSH Certificate and its private
@@ -26,7 +26,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new SSH Certificate Authority
 //
-// https://ngrok.com/docs/api#api-ssh-certificate-authorities-create
+// https://ngrok.com/docs/api-reference/sshcertificateauthorities/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.SSHCertificateAuthorityCreate) (*ngrok.SSHCertificateAuthority, error) {
 	if arg == nil {
 		arg = new(ngrok.SSHCertificateAuthorityCreate)
@@ -51,7 +51,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.SSHCertificateAuthorityC
 
 // Delete an SSH Certificate Authority
 //
-// https://ngrok.com/docs/api#api-ssh-certificate-authorities-delete
+// https://ngrok.com/docs/api-reference/sshcertificateauthorities/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -74,7 +74,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get detailed information about an SSH Certificate Authority
 //
-// https://ngrok.com/docs/api#api-ssh-certificate-authorities-get
+// https://ngrok.com/docs/api-reference/sshcertificateauthorities/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.SSHCertificateAuthority, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -98,7 +98,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.SSHCertificateAutho
 
 // List all SSH Certificate Authorities on this account
 //
-// https://ngrok.com/docs/api#api-ssh-certificate-authorities-list
+// https://ngrok.com/docs/api-reference/sshcertificateauthorities/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.SSHCertificateAuthority] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)
@@ -202,7 +202,7 @@ func (it *iterList) Err() error {
 
 // Update an SSH Certificate Authority
 //
-// https://ngrok.com/docs/api#api-ssh-certificate-authorities-update
+// https://ngrok.com/docs/api-reference/sshcertificateauthorities/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.SSHCertificateAuthorityUpdate) (*ngrok.SSHCertificateAuthority, error) {
 	if arg == nil {
 		arg = new(ngrok.SSHCertificateAuthorityUpdate)

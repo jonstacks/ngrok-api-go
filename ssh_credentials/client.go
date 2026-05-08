@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // SSH Credentials are SSH public keys that can be used to start SSH tunnels
@@ -27,7 +27,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 // Create a new ssh_credential from an uploaded public SSH key. This ssh credential
 // can be used to start new tunnels via ngrok's SSH gateway.
 //
-// https://ngrok.com/docs/api#api-ssh-credentials-create
+// https://ngrok.com/docs/api-reference/sshcredentials/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.SSHCredentialCreate) (*ngrok.SSHCredential, error) {
 	var res ngrok.SSHCredential
 	var path bytes.Buffer
@@ -49,7 +49,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.SSHCredentialCreate) (*n
 
 // Delete an ssh_credential by ID
 //
-// https://ngrok.com/docs/api#api-ssh-credentials-delete
+// https://ngrok.com/docs/api-reference/sshcredentials/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -72,7 +72,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get detailed information about an ssh_credential
 //
-// https://ngrok.com/docs/api#api-ssh-credentials-get
+// https://ngrok.com/docs/api-reference/sshcredentials/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.SSHCredential, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -96,7 +96,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.SSHCredential, erro
 
 // List all ssh credentials on this account
 //
-// https://ngrok.com/docs/api#api-ssh-credentials-list
+// https://ngrok.com/docs/api-reference/sshcredentials/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.SSHCredential] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)
@@ -200,7 +200,7 @@ func (it *iterList) Err() error {
 
 // Update attributes of an ssh_credential by ID
 //
-// https://ngrok.com/docs/api#api-ssh-credentials-update
+// https://ngrok.com/docs/api-reference/sshcredentials/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.SSHCredentialUpdate) (*ngrok.SSHCredential, error) {
 	if arg == nil {
 		arg = new(ngrok.SSHCredentialUpdate)

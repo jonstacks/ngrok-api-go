@@ -1,6 +1,6 @@
 // Code generated for API Clients. DO NOT EDIT.
 
-package agent_ingresses
+package ai_gateway_provider_keys
 
 import (
 	"bytes"
@@ -13,6 +13,9 @@ import (
 	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
+// AIGatewayProviderKeys is an api service for managing provider keys attached to
+// an AI Gateway API Key.
+
 type Client struct {
 	apiClient *api.Client
 }
@@ -21,14 +24,13 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 	return &Client{apiClient: api.NewClient(cfg)}
 }
 
-// Create a new Agent Ingress. The ngrok agent can be configured to connect to
-// ngrok via the new set of addresses on the returned Agent Ingress.
+// Create a new AI Gateway Provider Key
 //
-// https://ngrok.com/docs/api-reference/agentingresses/create
-func (c *Client) Create(ctx context.Context, arg *ngrok.AgentIngressCreate) (*ngrok.AgentIngress, error) {
-	var res ngrok.AgentIngress
+// https://ngrok.com/docs/api-reference/aigatewayproviderkeys/create
+func (c *Client) Create(ctx context.Context, arg *ngrok.AIGatewayProviderKeyCreate) (*ngrok.AIGatewayProviderKey, error) {
+	var res ngrok.AIGatewayProviderKey
 	var path bytes.Buffer
-	if err := template.Must(template.New("create_path").Parse("/agent_ingresses")).Execute(&path, arg); err != nil {
+	if err := template.Must(template.New("create_path").Parse("/ai_gateway_provider_keys")).Execute(&path, arg); err != nil {
 		return nil, fmt.Errorf("error building path for create: %w", err)
 	}
 	var (
@@ -44,14 +46,40 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.AgentIngressCreate) (*ng
 	return &res, nil
 }
 
-// Delete an Agent Ingress by ID
+// Update an existing AI Gateway Provider Key by ID
 //
-// https://ngrok.com/docs/api-reference/agentingresses/delete
+// https://ngrok.com/docs/api-reference/aigatewayproviderkeys/update
+func (c *Client) Update(ctx context.Context, arg *ngrok.AIGatewayProviderKeyUpdate) (*ngrok.AIGatewayProviderKey, error) {
+	if arg == nil {
+		arg = new(ngrok.AIGatewayProviderKeyUpdate)
+	}
+	var res ngrok.AIGatewayProviderKey
+	var path bytes.Buffer
+	if err := template.Must(template.New("update_path").Parse("/ai_gateway_provider_keys/{{ .ID }}")).Execute(&path, arg); err != nil {
+		return nil, fmt.Errorf("error building path for update: %w", err)
+	}
+	arg.ID = ""
+	var (
+		apiURL  = &url.URL{Path: path.String()}
+		bodyArg interface{}
+	)
+	apiURL.Path = path.String()
+	bodyArg = arg
+
+	if err := c.apiClient.Do(ctx, "PATCH", apiURL, bodyArg, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+// Delete an AI Gateway Provider Key
+//
+// https://ngrok.com/docs/api-reference/aigatewayproviderkeys/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
 	var path bytes.Buffer
-	if err := template.Must(template.New("delete_path").Parse("/agent_ingresses/{{ .ID }}")).Execute(&path, arg); err != nil {
+	if err := template.Must(template.New("delete_path").Parse("/ai_gateway_provider_keys/{{ .ID }}")).Execute(&path, arg); err != nil {
 		return fmt.Errorf("error building path for delete: %w", err)
 	}
 	arg.ID = ""
@@ -67,15 +95,15 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 	return nil
 }
 
-// Get the details of an Agent Ingress by ID.
+// Get an AI Gateway Provider Key by ID
 //
-// https://ngrok.com/docs/api-reference/agentingresses/get
-func (c *Client) Get(ctx context.Context, id string) (*ngrok.AgentIngress, error) {
+// https://ngrok.com/docs/api-reference/aigatewayproviderkeys/get
+func (c *Client) Get(ctx context.Context, id string) (*ngrok.AIGatewayProviderKey, error) {
 	arg := &ngrok.Item{ID: id}
 
-	var res ngrok.AgentIngress
+	var res ngrok.AIGatewayProviderKey
 	var path bytes.Buffer
-	if err := template.Must(template.New("get_path").Parse("/agent_ingresses/{{ .ID }}")).Execute(&path, arg); err != nil {
+	if err := template.Must(template.New("get_path").Parse("/ai_gateway_provider_keys/{{ .ID }}")).Execute(&path, arg); err != nil {
 		return nil, fmt.Errorf("error building path for get: %w", err)
 	}
 	arg.ID = ""
@@ -91,15 +119,15 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.AgentIngress, error
 	return &res, nil
 }
 
-// List all Agent Ingresses owned by this account
+// List AI Gateway Provider Keys
 //
-// https://ngrok.com/docs/api-reference/agentingresses/list
-func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.AgentIngress] {
+// https://ngrok.com/docs/api-reference/aigatewayproviderkeys/list
+func (c *Client) List(paging *ngrok.Paging) ngrok.Iter[*ngrok.AIGatewayProviderKey] {
 	if paging == nil {
-		paging = new(ngrok.FilteredPaging)
+		paging = new(ngrok.Paging)
 	}
 	var path bytes.Buffer
-	if err := template.Must(template.New("list_path").Parse("/agent_ingresses")).Execute(&path, paging); err != nil {
+	if err := template.Must(template.New("list_path").Parse("/ai_gateway_provider_keys")).Execute(&path, paging); err != nil {
 		return &iterList{err: fmt.Errorf("error building path for list: %w", err)}
 	}
 	var apiURL = &url.URL{Path: path.String()}
@@ -109,9 +137,6 @@ func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.AgentIngre
 	}
 	if paging.Limit != nil {
 		queryVals.Set("limit", *paging.Limit)
-	}
-	if paging.Filter != nil {
-		queryVals.Set("filter", *paging.Filter)
 	}
 	apiURL.RawQuery = queryVals.Encode()
 	return &iterList{
@@ -126,7 +151,7 @@ func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.AgentIngre
 type iterList struct {
 	client *Client
 	n      int
-	items  []ngrok.AgentIngress
+	items  []ngrok.AIGatewayProviderKey
 	err    error
 
 	nextPage *url.URL
@@ -154,7 +179,7 @@ func (it *iterList) Next(ctx context.Context) bool {
 	}
 
 	// fetch the next page
-	var resp ngrok.AgentIngressList
+	var resp ngrok.AIGatewayProviderKeyList
 	err := it.client.apiClient.Do(ctx, "GET", it.nextPage, nil, &resp)
 	if err != nil {
 		it.err = err
@@ -173,18 +198,18 @@ func (it *iterList) Next(ctx context.Context) bool {
 	}
 
 	// page with zero items means there are no more
-	if len(resp.Ingresses) == 0 {
+	if len(resp.AiGatewayProviderKeys) == 0 {
 		return false
 	}
 
 	it.n = -1
-	it.items = resp.Ingresses
+	it.items = resp.AiGatewayProviderKeys
 	return it.Next(ctx)
 }
 
-// Item() returns the AgentIngress currently
+// Item() returns the AIGatewayProviderKey currently
 // pointed to by the iterator.
-func (it *iterList) Item() *ngrok.AgentIngress {
+func (it *iterList) Item() *ngrok.AIGatewayProviderKey {
 	return &it.items[it.n]
 }
 
@@ -193,30 +218,4 @@ func (it *iterList) Item() *ngrok.AgentIngress {
 // after Next() returns false.
 func (it *iterList) Err() error {
 	return it.err
-}
-
-// Update attributes of an Agent Ingress by ID.
-//
-// https://ngrok.com/docs/api-reference/agentingresses/update
-func (c *Client) Update(ctx context.Context, arg *ngrok.AgentIngressUpdate) (*ngrok.AgentIngress, error) {
-	if arg == nil {
-		arg = new(ngrok.AgentIngressUpdate)
-	}
-	var res ngrok.AgentIngress
-	var path bytes.Buffer
-	if err := template.Must(template.New("update_path").Parse("/agent_ingresses/{{ .ID }}")).Execute(&path, arg); err != nil {
-		return nil, fmt.Errorf("error building path for update: %w", err)
-	}
-	arg.ID = ""
-	var (
-		apiURL  = &url.URL{Path: path.String()}
-		bodyArg interface{}
-	)
-	apiURL.Path = path.String()
-	bodyArg = arg
-
-	if err := c.apiClient.Do(ctx, "PATCH", apiURL, bodyArg, &res); err != nil {
-		return nil, err
-	}
-	return &res, nil
 }

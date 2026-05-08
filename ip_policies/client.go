@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // IP Policies are reusable groups of CIDR ranges with an allow or deny
@@ -29,7 +29,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 // Create a new IP policy. It will not apply to any traffic until you associate to
 // a traffic source via an endpoint configuration or IP restriction.
 //
-// https://ngrok.com/docs/api#api-ip-policies-create
+// https://ngrok.com/docs/api-reference/ippolicies/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.IPPolicyCreate) (*ngrok.IPPolicy, error) {
 	if arg == nil {
 		arg = new(ngrok.IPPolicyCreate)
@@ -56,7 +56,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.IPPolicyCreate) (*ngrok.
 // purposes of traffic restriction it will be treated as if the IP policy remains
 // but has zero rules.
 //
-// https://ngrok.com/docs/api#api-ip-policies-delete
+// https://ngrok.com/docs/api-reference/ippolicies/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -79,7 +79,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get detailed information about an IP policy by ID.
 //
-// https://ngrok.com/docs/api#api-ip-policies-get
+// https://ngrok.com/docs/api-reference/ippolicies/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.IPPolicy, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -103,7 +103,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.IPPolicy, error) {
 
 // List all IP policies on this account
 //
-// https://ngrok.com/docs/api#api-ip-policies-list
+// https://ngrok.com/docs/api-reference/ippolicies/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.IPPolicy] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)
@@ -207,7 +207,7 @@ func (it *iterList) Err() error {
 
 // Update attributes of an IP policy by ID
 //
-// https://ngrok.com/docs/api#api-ip-policies-update
+// https://ngrok.com/docs/api-reference/ippolicies/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.IPPolicyUpdate) (*ngrok.IPPolicy, error) {
 	if arg == nil {
 		arg = new(ngrok.IPPolicyUpdate)

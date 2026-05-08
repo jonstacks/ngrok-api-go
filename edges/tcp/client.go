@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 type Client struct {
@@ -23,7 +23,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a TCP Edge
 //
-// https://ngrok.com/docs/api#api-edges-tcp-create
+// https://ngrok.com/docs/api-reference/edgestcp/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.TCPEdgeCreate) (*ngrok.TCPEdge, error) {
 	if arg == nil {
 		arg = new(ngrok.TCPEdgeCreate)
@@ -48,7 +48,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.TCPEdgeCreate) (*ngrok.T
 
 // Get a TCP Edge by ID
 //
-// https://ngrok.com/docs/api#api-edges-tcp-get
+// https://ngrok.com/docs/api-reference/edgestcp/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.TCPEdge, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -72,7 +72,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.TCPEdge, error) {
 
 // Returns a list of all TCP Edges on this account
 //
-// https://ngrok.com/docs/api#api-edges-tcp-list
+// https://ngrok.com/docs/api-reference/edgestcp/list
 func (c *Client) List(paging *ngrok.Paging) ngrok.Iter[*ngrok.TCPEdge] {
 	if paging == nil {
 		paging = new(ngrok.Paging)
@@ -176,7 +176,7 @@ func (it *iterList) Err() error {
 // completely replace the existing value. There is no way to delete an existing
 // module via this API, instead use the delete module API.
 //
-// https://ngrok.com/docs/api#api-edges-tcp-update
+// https://ngrok.com/docs/api-reference/edgestcp/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.TCPEdgeUpdate) (*ngrok.TCPEdge, error) {
 	if arg == nil {
 		arg = new(ngrok.TCPEdgeUpdate)
@@ -202,7 +202,7 @@ func (c *Client) Update(ctx context.Context, arg *ngrok.TCPEdgeUpdate) (*ngrok.T
 
 // Delete a TCP Edge by ID
 //
-// https://ngrok.com/docs/api#api-edges-tcp-delete
+// https://ngrok.com/docs/api-reference/edgestcp/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 

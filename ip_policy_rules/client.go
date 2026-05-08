@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // IP Policy Rules are the IPv4 or IPv6 CIDRs entries that
@@ -26,7 +26,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new IP policy rule attached to an IP Policy.
 //
-// https://ngrok.com/docs/api#api-ip-policy-rules-create
+// https://ngrok.com/docs/api-reference/ippolicyrules/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.IPPolicyRuleCreate) (*ngrok.IPPolicyRule, error) {
 	var res ngrok.IPPolicyRule
 	var path bytes.Buffer
@@ -48,7 +48,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.IPPolicyRuleCreate) (*ng
 
 // Delete an IP policy rule.
 //
-// https://ngrok.com/docs/api#api-ip-policy-rules-delete
+// https://ngrok.com/docs/api-reference/ippolicyrules/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -71,7 +71,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get detailed information about an IP policy rule by ID.
 //
-// https://ngrok.com/docs/api#api-ip-policy-rules-get
+// https://ngrok.com/docs/api-reference/ippolicyrules/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.IPPolicyRule, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -95,7 +95,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.IPPolicyRule, error
 
 // List all IP policy rules on this account
 //
-// https://ngrok.com/docs/api#api-ip-policy-rules-list
+// https://ngrok.com/docs/api-reference/ippolicyrules/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.IPPolicyRule] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)
@@ -199,7 +199,7 @@ func (it *iterList) Err() error {
 
 // Update attributes of an IP policy rule by ID
 //
-// https://ngrok.com/docs/api#api-ip-policy-rules-update
+// https://ngrok.com/docs/api-reference/ippolicyrules/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.IPPolicyRuleUpdate) (*ngrok.IPPolicyRule, error) {
 	if arg == nil {
 		arg = new(ngrok.IPPolicyRuleUpdate)

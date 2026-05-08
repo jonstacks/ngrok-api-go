@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // Vaults is an api service for securely storing and managing sensitive data such
@@ -26,7 +26,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new Vault
 //
-// https://ngrok.com/docs/api#api-vaults-create
+// https://ngrok.com/docs/api-reference/vaults/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.VaultCreate) (*ngrok.Vault, error) {
 	if arg == nil {
 		arg = new(ngrok.VaultCreate)
@@ -51,7 +51,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.VaultCreate) (*ngrok.Vau
 
 // Update an existing Vault by ID
 //
-// https://ngrok.com/docs/api#api-vaults-update
+// https://ngrok.com/docs/api-reference/vaults/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.VaultUpdate) (*ngrok.Vault, error) {
 	if arg == nil {
 		arg = new(ngrok.VaultUpdate)
@@ -77,7 +77,7 @@ func (c *Client) Update(ctx context.Context, arg *ngrok.VaultUpdate) (*ngrok.Vau
 
 // Delete a Vault
 //
-// https://ngrok.com/docs/api#api-vaults-delete
+// https://ngrok.com/docs/api-reference/vaults/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -100,7 +100,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get a Vault by ID
 //
-// https://ngrok.com/docs/api#api-vaults-get
+// https://ngrok.com/docs/api-reference/vaults/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.Vault, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -124,7 +124,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.Vault, error) {
 
 // Get Secrets by Vault ID
 //
-// https://ngrok.com/docs/api#api-vaults-get-secrets-by-vault
+// https://ngrok.com/docs/api-reference/vaults/get-secrets-by-vault
 func (c *Client) GetSecretsByVault(id string, paging *ngrok.Paging) ngrok.Iter[*ngrok.Secret] {
 	arg := &ngrok.ItemPaging{ID: id}
 	if paging == nil {
@@ -226,7 +226,7 @@ func (it *iterGetSecretsByVault) Err() error {
 
 // List all Vaults owned by account
 //
-// https://ngrok.com/docs/api#api-vaults-list
+// https://ngrok.com/docs/api-reference/vaults/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.Vault] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)

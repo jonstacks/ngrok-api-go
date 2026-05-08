@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // A Tunnel Group Backend balances traffic among all online tunnels that match
@@ -26,7 +26,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new TunnelGroup backend
 //
-// https://ngrok.com/docs/api#api-tunnel-group-backends-create
+// https://ngrok.com/docs/api-reference/tunnelgroupbackends/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.TunnelGroupBackendCreate) (*ngrok.TunnelGroupBackend, error) {
 	if arg == nil {
 		arg = new(ngrok.TunnelGroupBackendCreate)
@@ -51,7 +51,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.TunnelGroupBackendCreate
 
 // Delete a TunnelGroup backend by ID.
 //
-// https://ngrok.com/docs/api#api-tunnel-group-backends-delete
+// https://ngrok.com/docs/api-reference/tunnelgroupbackends/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -74,7 +74,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get detailed information about a TunnelGroup backend by ID
 //
-// https://ngrok.com/docs/api#api-tunnel-group-backends-get
+// https://ngrok.com/docs/api-reference/tunnelgroupbackends/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.TunnelGroupBackend, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -98,7 +98,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.TunnelGroupBackend,
 
 // List all TunnelGroup backends on this account
 //
-// https://ngrok.com/docs/api#api-tunnel-group-backends-list
+// https://ngrok.com/docs/api-reference/tunnelgroupbackends/list
 func (c *Client) List(paging *ngrok.Paging) ngrok.Iter[*ngrok.TunnelGroupBackend] {
 	if paging == nil {
 		paging = new(ngrok.Paging)
@@ -199,7 +199,7 @@ func (it *iterList) Err() error {
 
 // Update TunnelGroup backend by ID
 //
-// https://ngrok.com/docs/api#api-tunnel-group-backends-update
+// https://ngrok.com/docs/api-reference/tunnelgroupbackends/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.TunnelGroupBackendUpdate) (*ngrok.TunnelGroupBackend, error) {
 	if arg == nil {
 		arg = new(ngrok.TunnelGroupBackendUpdate)

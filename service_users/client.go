@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 type Client struct {
@@ -23,7 +23,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new service user
 //
-// https://ngrok.com/docs/api#api-service-users-create
+// https://ngrok.com/docs/api-reference/serviceusers/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.ServiceUserCreate) (*ngrok.ServiceUser, error) {
 	if arg == nil {
 		arg = new(ngrok.ServiceUserCreate)
@@ -48,7 +48,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.ServiceUserCreate) (*ngr
 
 // Delete a service user by ID
 //
-// https://ngrok.com/docs/api#api-service-users-delete
+// https://ngrok.com/docs/api-reference/serviceusers/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -71,7 +71,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get the details of a Bot User by ID.
 //
-// https://ngrok.com/docs/api#api-service-users-get
+// https://ngrok.com/docs/api-reference/serviceusers/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.ServiceUser, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -95,7 +95,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.ServiceUser, error)
 
 // List all service users in this account.
 //
-// https://ngrok.com/docs/api#api-service-users-list
+// https://ngrok.com/docs/api-reference/serviceusers/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.ServiceUser] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)
@@ -199,7 +199,7 @@ func (it *iterList) Err() error {
 
 // Update attributes of a service user by ID.
 //
-// https://ngrok.com/docs/api#api-service-users-update
+// https://ngrok.com/docs/api-reference/serviceusers/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.ServiceUserUpdate) (*ngrok.ServiceUser, error) {
 	if arg == nil {
 		arg = new(ngrok.ServiceUserUpdate)

@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // SSH User Certificates are presented by SSH clients when connecting to an SSH
@@ -27,7 +27,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new SSH User Certificate
 //
-// https://ngrok.com/docs/api#api-ssh-user-certificates-create
+// https://ngrok.com/docs/api-reference/sshusercertificates/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.SSHUserCertificateCreate) (*ngrok.SSHUserCertificate, error) {
 	var res ngrok.SSHUserCertificate
 	var path bytes.Buffer
@@ -49,7 +49,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.SSHUserCertificateCreate
 
 // Delete an SSH User Certificate
 //
-// https://ngrok.com/docs/api#api-ssh-user-certificates-delete
+// https://ngrok.com/docs/api-reference/sshusercertificates/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -72,7 +72,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get detailed information about an SSH User Certificate
 //
-// https://ngrok.com/docs/api#api-ssh-user-certificates-get
+// https://ngrok.com/docs/api-reference/sshusercertificates/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.SSHUserCertificate, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -96,7 +96,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.SSHUserCertificate,
 
 // List all SSH User Certificates issued on this account
 //
-// https://ngrok.com/docs/api#api-ssh-user-certificates-list
+// https://ngrok.com/docs/api-reference/sshusercertificates/list
 func (c *Client) List(paging *ngrok.Paging) ngrok.Iter[*ngrok.SSHUserCertificate] {
 	if paging == nil {
 		paging = new(ngrok.Paging)
@@ -197,7 +197,7 @@ func (it *iterList) Err() error {
 
 // Update an SSH User Certificate
 //
-// https://ngrok.com/docs/api#api-ssh-user-certificates-update
+// https://ngrok.com/docs/api-reference/sshusercertificates/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.SSHUserCertificateUpdate) (*ngrok.SSHUserCertificate, error) {
 	if arg == nil {
 		arg = new(ngrok.SSHUserCertificateUpdate)

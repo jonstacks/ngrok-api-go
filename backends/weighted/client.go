@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // A Weighted Backend balances traffic among the referenced backends. Traffic
@@ -28,7 +28,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new Weighted backend
 //
-// https://ngrok.com/docs/api#api-weighted-backends-create
+// https://ngrok.com/docs/api-reference/weightedbackends/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.WeightedBackendCreate) (*ngrok.WeightedBackend, error) {
 	if arg == nil {
 		arg = new(ngrok.WeightedBackendCreate)
@@ -53,7 +53,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.WeightedBackendCreate) (
 
 // Delete a Weighted backend by ID.
 //
-// https://ngrok.com/docs/api#api-weighted-backends-delete
+// https://ngrok.com/docs/api-reference/weightedbackends/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -76,7 +76,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get detailed information about a Weighted backend by ID
 //
-// https://ngrok.com/docs/api#api-weighted-backends-get
+// https://ngrok.com/docs/api-reference/weightedbackends/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.WeightedBackend, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -100,7 +100,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.WeightedBackend, er
 
 // List all Weighted backends on this account
 //
-// https://ngrok.com/docs/api#api-weighted-backends-list
+// https://ngrok.com/docs/api-reference/weightedbackends/list
 func (c *Client) List(paging *ngrok.Paging) ngrok.Iter[*ngrok.WeightedBackend] {
 	if paging == nil {
 		paging = new(ngrok.Paging)
@@ -201,7 +201,7 @@ func (it *iterList) Err() error {
 
 // Update Weighted backend by ID
 //
-// https://ngrok.com/docs/api#api-weighted-backends-update
+// https://ngrok.com/docs/api-reference/weightedbackends/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.WeightedBackendUpdate) (*ngrok.WeightedBackend, error) {
 	if arg == nil {
 		arg = new(ngrok.WeightedBackendUpdate)

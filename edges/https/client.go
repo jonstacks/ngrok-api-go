@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 type Client struct {
@@ -23,7 +23,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create an HTTPS Edge
 //
-// https://ngrok.com/docs/api#api-edges-https-create
+// https://ngrok.com/docs/api-reference/edgeshttps/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.HTTPSEdgeCreate) (*ngrok.HTTPSEdge, error) {
 	if arg == nil {
 		arg = new(ngrok.HTTPSEdgeCreate)
@@ -48,7 +48,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.HTTPSEdgeCreate) (*ngrok
 
 // Get an HTTPS Edge by ID
 //
-// https://ngrok.com/docs/api#api-edges-https-get
+// https://ngrok.com/docs/api-reference/edgeshttps/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.HTTPSEdge, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -72,7 +72,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.HTTPSEdge, error) {
 
 // Returns a list of all HTTPS Edges on this account
 //
-// https://ngrok.com/docs/api#api-edges-https-list
+// https://ngrok.com/docs/api-reference/edgeshttps/list
 func (c *Client) List(paging *ngrok.Paging) ngrok.Iter[*ngrok.HTTPSEdge] {
 	if paging == nil {
 		paging = new(ngrok.Paging)
@@ -176,7 +176,7 @@ func (it *iterList) Err() error {
 // completely replace the existing value. There is no way to delete an existing
 // module via this API, instead use the delete module API.
 //
-// https://ngrok.com/docs/api#api-edges-https-update
+// https://ngrok.com/docs/api-reference/edgeshttps/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.HTTPSEdgeUpdate) (*ngrok.HTTPSEdge, error) {
 	if arg == nil {
 		arg = new(ngrok.HTTPSEdgeUpdate)
@@ -202,7 +202,7 @@ func (c *Client) Update(ctx context.Context, arg *ngrok.HTTPSEdgeUpdate) (*ngrok
 
 // Delete an HTTPS Edge by ID
 //
-// https://ngrok.com/docs/api#api-edges-https-delete
+// https://ngrok.com/docs/api-reference/edgeshttps/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 

@@ -1,4 +1,13 @@
 <!-- Code generated for API Clients. DO NOT EDIT. -->
+## v9.0.0
+### Breaking Changes
+* The module path is now `github.com/ngrok/ngrok-api-go/v9`. Update your imports accordingly.
+* JSON serialization now uses the `omitzero` struct tag option instead of `omitempty`. This restores the ability to distinguish "field not set" from "field explicitly empty" for slice and map fields:
+  * A `nil` slice or map is still omitted from the request body.
+  * An empty slice (`[]T{}`) or empty map (`map[K]V{}`) is now serialized as `[]` or `{}`. Previously these were silently omitted, which made it impossible to clear a list or map via the API.
+  * Required code review of any callers that pass empty (non-nil) slices/maps where they previously relied on the field being omitted.
+* As a side effect of `omitzero`, zero-value `time.Time` fields are now omitted instead of being serialized as `"0001-01-01T00:00:00Z"`.
+
 ## v8.0.0
 ### Breaking Changes
 * List methods for resources that support CEL filtering now accept `*FilteredPaging` instead of `*Paging`. `FilteredPaging` adds a `Filter` field for passing CEL filter expressions.

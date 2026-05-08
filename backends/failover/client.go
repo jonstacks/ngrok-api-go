@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // A Failover backend defines failover behavior within a list of referenced
@@ -28,7 +28,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new Failover backend
 //
-// https://ngrok.com/docs/api#api-failover-backends-create
+// https://ngrok.com/docs/api-reference/failoverbackends/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.FailoverBackendCreate) (*ngrok.FailoverBackend, error) {
 	if arg == nil {
 		arg = new(ngrok.FailoverBackendCreate)
@@ -53,7 +53,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.FailoverBackendCreate) (
 
 // Delete a Failover backend by ID.
 //
-// https://ngrok.com/docs/api#api-failover-backends-delete
+// https://ngrok.com/docs/api-reference/failoverbackends/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -76,7 +76,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get detailed information about a Failover backend by ID
 //
-// https://ngrok.com/docs/api#api-failover-backends-get
+// https://ngrok.com/docs/api-reference/failoverbackends/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.FailoverBackend, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -100,7 +100,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.FailoverBackend, er
 
 // List all Failover backends on this account
 //
-// https://ngrok.com/docs/api#api-failover-backends-list
+// https://ngrok.com/docs/api-reference/failoverbackends/list
 func (c *Client) List(paging *ngrok.Paging) ngrok.Iter[*ngrok.FailoverBackend] {
 	if paging == nil {
 		paging = new(ngrok.Paging)
@@ -201,7 +201,7 @@ func (it *iterList) Err() error {
 
 // Update Failover backend by ID
 //
-// https://ngrok.com/docs/api#api-failover-backends-update
+// https://ngrok.com/docs/api-reference/failoverbackends/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.FailoverBackendUpdate) (*ngrok.FailoverBackend, error) {
 	if arg == nil {
 		arg = new(ngrok.FailoverBackendUpdate)

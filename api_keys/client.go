@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // API Keys are used to authenticate to the ngrok
@@ -30,7 +30,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 // Create a new API key. The generated API key can be used to authenticate to the
 // ngrok API.
 //
-// https://ngrok.com/docs/api#api-api-keys-create
+// https://ngrok.com/docs/api-reference/apikeys/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.APIKeyCreate) (*ngrok.APIKey, error) {
 	if arg == nil {
 		arg = new(ngrok.APIKeyCreate)
@@ -55,7 +55,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.APIKeyCreate) (*ngrok.AP
 
 // Delete an API key by ID
 //
-// https://ngrok.com/docs/api#api-api-keys-delete
+// https://ngrok.com/docs/api-reference/apikeys/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -78,7 +78,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get the details of an API key by ID.
 //
-// https://ngrok.com/docs/api#api-api-keys-get
+// https://ngrok.com/docs/api-reference/apikeys/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.APIKey, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -102,7 +102,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.APIKey, error) {
 
 // List all API keys owned by this account
 //
-// https://ngrok.com/docs/api#api-api-keys-list
+// https://ngrok.com/docs/api-reference/apikeys/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.APIKey] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)
@@ -206,7 +206,7 @@ func (it *iterList) Err() error {
 
 // Update attributes of an API key by ID.
 //
-// https://ngrok.com/docs/api#api-api-keys-update
+// https://ngrok.com/docs/api-reference/apikeys/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.APIKeyUpdate) (*ngrok.APIKey, error) {
 	if arg == nil {
 		arg = new(ngrok.APIKeyUpdate)

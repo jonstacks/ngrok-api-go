@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 type Client struct {
@@ -23,7 +23,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create an HTTPS Edge Route
 //
-// https://ngrok.com/docs/api#api-edges-https-routes-create
+// https://ngrok.com/docs/api-reference/edgeshttpsroutes/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.HTTPSEdgeRouteCreate) (*ngrok.HTTPSEdgeRoute, error) {
 	var res ngrok.HTTPSEdgeRoute
 	var path bytes.Buffer
@@ -46,7 +46,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.HTTPSEdgeRouteCreate) (*
 
 // Get an HTTPS Edge Route by ID
 //
-// https://ngrok.com/docs/api#api-edges-https-routes-get
+// https://ngrok.com/docs/api-reference/edgeshttpsroutes/get
 func (c *Client) Get(ctx context.Context, arg *ngrok.EdgeRouteItem) (*ngrok.HTTPSEdgeRoute, error) {
 	if arg == nil {
 		arg = new(ngrok.EdgeRouteItem)
@@ -75,7 +75,7 @@ func (c *Client) Get(ctx context.Context, arg *ngrok.EdgeRouteItem) (*ngrok.HTTP
 // will completely replace the existing value. There is no way to delete an
 // existing module via this API, instead use the delete module API.
 //
-// https://ngrok.com/docs/api#api-edges-https-routes-update
+// https://ngrok.com/docs/api-reference/edgeshttpsroutes/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.HTTPSEdgeRouteUpdate) (*ngrok.HTTPSEdgeRoute, error) {
 	if arg == nil {
 		arg = new(ngrok.HTTPSEdgeRouteUpdate)
@@ -102,7 +102,7 @@ func (c *Client) Update(ctx context.Context, arg *ngrok.HTTPSEdgeRouteUpdate) (*
 
 // Delete an HTTPS Edge Route by ID
 //
-// https://ngrok.com/docs/api#api-edges-https-routes-delete
+// https://ngrok.com/docs/api-reference/edgeshttpsroutes/delete
 func (c *Client) Delete(ctx context.Context, arg *ngrok.EdgeRouteItem) error {
 	if arg == nil {
 		arg = new(ngrok.EdgeRouteItem)

@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // Endpoints provides an API for querying the endpoint objects
@@ -27,7 +27,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create an endpoint, currently available only for cloud endpoints
 //
-// https://ngrok.com/docs/api#api-endpoints-create
+// https://ngrok.com/docs/api-reference/endpoints/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.EndpointCreate) (*ngrok.Endpoint, error) {
 	var res ngrok.Endpoint
 	var path bytes.Buffer
@@ -49,7 +49,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.EndpointCreate) (*ngrok.
 
 // List all active endpoints on the account
 //
-// https://ngrok.com/docs/api#api-endpoints-list
+// https://ngrok.com/docs/api-reference/endpoints/list
 func (c *Client) List(paging *ngrok.Paging) ngrok.Iter[*ngrok.Endpoint] {
 	if paging == nil {
 		paging = new(ngrok.Paging)
@@ -150,7 +150,7 @@ func (it *iterList) Err() error {
 
 // Get the status of an endpoint by ID
 //
-// https://ngrok.com/docs/api#api-endpoints-get
+// https://ngrok.com/docs/api-reference/endpoints/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.Endpoint, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -174,7 +174,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.Endpoint, error) {
 
 // Update an Endpoint by ID, currently available only for cloud endpoints
 //
-// https://ngrok.com/docs/api#api-endpoints-update
+// https://ngrok.com/docs/api-reference/endpoints/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.EndpointUpdate) (*ngrok.Endpoint, error) {
 	if arg == nil {
 		arg = new(ngrok.EndpointUpdate)
@@ -200,7 +200,7 @@ func (c *Client) Update(ctx context.Context, arg *ngrok.EndpointUpdate) (*ngrok.
 
 // Delete an Endpoint by ID, currently available only for cloud endpoints
 //
-// https://ngrok.com/docs/api#api-endpoints-delete
+// https://ngrok.com/docs/api-reference/endpoints/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
