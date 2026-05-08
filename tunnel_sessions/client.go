@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // Tunnel Sessions represent instances of ngrok agents or SSH reverse tunnel
@@ -27,7 +27,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // List all online tunnel sessions running on this account.
 //
-// https://ngrok.com/docs/api#api-tunnel-sessions-list
+// https://ngrok.com/docs/api-reference/tunnelsessions/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.TunnelSession] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)
@@ -131,7 +131,7 @@ func (it *iterList) Err() error {
 
 // Get the detailed status of a tunnel session by ID
 //
-// https://ngrok.com/docs/api#api-tunnel-sessions-get
+// https://ngrok.com/docs/api-reference/tunnelsessions/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.TunnelSession, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -158,7 +158,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.TunnelSession, erro
 // not supported on Windows. When an agent restarts, it reconnects with a new
 // tunnel session ID.
 //
-// https://ngrok.com/docs/api#api-tunnel-sessions-restart
+// https://ngrok.com/docs/api-reference/tunnelsessions/restart
 func (c *Client) Restart(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -183,7 +183,7 @@ func (c *Client) Restart(ctx context.Context, id string) error {
 // Issues a command instructing the ngrok agent that started this tunnel session to
 // exit.
 //
-// https://ngrok.com/docs/api#api-tunnel-sessions-stop
+// https://ngrok.com/docs/api-reference/tunnelsessions/stop
 func (c *Client) Stop(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -218,7 +218,7 @@ func (c *Client) Stop(ctx context.Context, id string) error {
 // disabled update checks the agent is currently in process of updating the agent
 // has already successfully updated but has not yet been restarted
 //
-// https://ngrok.com/docs/api#api-tunnel-sessions-update
+// https://ngrok.com/docs/api-reference/tunnelsessions/update
 func (c *Client) Update(ctx context.Context, id string) error {
 	arg := &ngrok.TunnelSessionsUpdate{ID: id}
 

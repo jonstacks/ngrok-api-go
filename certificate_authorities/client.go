@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // Certificate Authorities are x509 certificates that are used to sign other
@@ -29,7 +29,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Upload a new Certificate Authority
 //
-// https://ngrok.com/docs/api#api-certificate-authorities-create
+// https://ngrok.com/docs/api-reference/certificateauthorities/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.CertificateAuthorityCreate) (*ngrok.CertificateAuthority, error) {
 	var res ngrok.CertificateAuthority
 	var path bytes.Buffer
@@ -51,7 +51,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.CertificateAuthorityCrea
 
 // Delete a Certificate Authority
 //
-// https://ngrok.com/docs/api#api-certificate-authorities-delete
+// https://ngrok.com/docs/api-reference/certificateauthorities/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -74,7 +74,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get detailed information about a certificate authority
 //
-// https://ngrok.com/docs/api#api-certificate-authorities-get
+// https://ngrok.com/docs/api-reference/certificateauthorities/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.CertificateAuthority, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -98,7 +98,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.CertificateAuthorit
 
 // List all Certificate Authority on this account
 //
-// https://ngrok.com/docs/api#api-certificate-authorities-list
+// https://ngrok.com/docs/api-reference/certificateauthorities/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.CertificateAuthority] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)
@@ -202,7 +202,7 @@ func (it *iterList) Err() error {
 
 // Update attributes of a Certificate Authority by ID
 //
-// https://ngrok.com/docs/api#api-certificate-authorities-update
+// https://ngrok.com/docs/api-reference/certificateauthorities/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.CertificateAuthorityUpdate) (*ngrok.CertificateAuthority, error) {
 	if arg == nil {
 		arg = new(ngrok.CertificateAuthorityUpdate)

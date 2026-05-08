@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // An IP restriction is a restriction placed on the CIDRs that are allowed to
@@ -30,7 +30,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new IP restriction
 //
-// https://ngrok.com/docs/api#api-ip-restrictions-create
+// https://ngrok.com/docs/api-reference/iprestrictions/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.IPRestrictionCreate) (*ngrok.IPRestriction, error) {
 	var res ngrok.IPRestriction
 	var path bytes.Buffer
@@ -52,7 +52,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.IPRestrictionCreate) (*n
 
 // Delete an IP restriction
 //
-// https://ngrok.com/docs/api#api-ip-restrictions-delete
+// https://ngrok.com/docs/api-reference/iprestrictions/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -75,7 +75,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get detailed information about an IP restriction
 //
-// https://ngrok.com/docs/api#api-ip-restrictions-get
+// https://ngrok.com/docs/api-reference/iprestrictions/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.IPRestriction, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -99,7 +99,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.IPRestriction, erro
 
 // List all IP restrictions on this account
 //
-// https://ngrok.com/docs/api#api-ip-restrictions-list
+// https://ngrok.com/docs/api-reference/iprestrictions/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.IPRestriction] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)
@@ -203,7 +203,7 @@ func (it *iterList) Err() error {
 
 // Update attributes of an IP restriction by ID
 //
-// https://ngrok.com/docs/api#api-ip-restrictions-update
+// https://ngrok.com/docs/api-reference/iprestrictions/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.IPRestrictionUpdate) (*ngrok.IPRestriction, error) {
 	if arg == nil {
 		arg = new(ngrok.IPRestrictionUpdate)

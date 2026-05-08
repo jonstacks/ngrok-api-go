@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // Reserved Domains are hostnames that you can listen for traffic on. Domains
@@ -28,7 +28,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new reserved domain.
 //
-// https://ngrok.com/docs/api#api-reserved-domains-create
+// https://ngrok.com/docs/api-reference/reserveddomains/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.ReservedDomainCreate) (*ngrok.ReservedDomain, error) {
 	if arg == nil {
 		arg = new(ngrok.ReservedDomainCreate)
@@ -53,7 +53,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.ReservedDomainCreate) (*
 
 // Delete a reserved domain.
 //
-// https://ngrok.com/docs/api#api-reserved-domains-delete
+// https://ngrok.com/docs/api-reference/reserveddomains/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -76,7 +76,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get the details of a reserved domain.
 //
-// https://ngrok.com/docs/api#api-reserved-domains-get
+// https://ngrok.com/docs/api-reference/reserveddomains/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.ReservedDomain, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -100,7 +100,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.ReservedDomain, err
 
 // List all reserved domains on this account.
 //
-// https://ngrok.com/docs/api#api-reserved-domains-list
+// https://ngrok.com/docs/api-reference/reserveddomains/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.ReservedDomain] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)
@@ -204,7 +204,7 @@ func (it *iterList) Err() error {
 
 // Update the attributes of a reserved domain.
 //
-// https://ngrok.com/docs/api#api-reserved-domains-update
+// https://ngrok.com/docs/api-reference/reserveddomains/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.ReservedDomainUpdate) (*ngrok.ReservedDomain, error) {
 	if arg == nil {
 		arg = new(ngrok.ReservedDomainUpdate)
@@ -230,7 +230,7 @@ func (c *Client) Update(ctx context.Context, arg *ngrok.ReservedDomainUpdate) (*
 
 // Detach the certificate management policy attached to a reserved domain.
 //
-// https://ngrok.com/docs/api#api-reserved-domains-delete-certificate-management-policy
+// https://ngrok.com/docs/api-reference/reserveddomains/delete-certificate-management-policy
 func (c *Client) DeleteCertificateManagementPolicy(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -253,7 +253,7 @@ func (c *Client) DeleteCertificateManagementPolicy(ctx context.Context, id strin
 
 // Detach the certificate attached to a reserved domain.
 //
-// https://ngrok.com/docs/api#api-reserved-domains-delete-certificate
+// https://ngrok.com/docs/api-reference/reserveddomains/delete-certificate
 func (c *Client) DeleteCertificate(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 

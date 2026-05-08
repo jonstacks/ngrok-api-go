@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // KubernetesOperators is used by the Kubernetes Operator to register and
@@ -27,7 +27,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new Kubernetes Operator
 //
-// https://ngrok.com/docs/api#api-kubernetes-operators-create
+// https://ngrok.com/docs/api-reference/kubernetesoperators/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.KubernetesOperatorCreate) (*ngrok.KubernetesOperator, error) {
 	if arg == nil {
 		arg = new(ngrok.KubernetesOperatorCreate)
@@ -52,7 +52,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.KubernetesOperatorCreate
 
 // Update an existing Kubernetes operator by ID.
 //
-// https://ngrok.com/docs/api#api-kubernetes-operators-update
+// https://ngrok.com/docs/api-reference/kubernetesoperators/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.KubernetesOperatorUpdate) (*ngrok.KubernetesOperator, error) {
 	if arg == nil {
 		arg = new(ngrok.KubernetesOperatorUpdate)
@@ -78,7 +78,7 @@ func (c *Client) Update(ctx context.Context, arg *ngrok.KubernetesOperatorUpdate
 
 // Delete a Kubernetes Operator
 //
-// https://ngrok.com/docs/api#api-kubernetes-operators-delete
+// https://ngrok.com/docs/api-reference/kubernetesoperators/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -101,7 +101,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get of a Kubernetes Operator
 //
-// https://ngrok.com/docs/api#api-kubernetes-operators-get
+// https://ngrok.com/docs/api-reference/kubernetesoperators/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.KubernetesOperator, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -125,7 +125,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.KubernetesOperator,
 
 // List all Kubernetes Operators owned by this account
 //
-// https://ngrok.com/docs/api#api-kubernetes-operators-list
+// https://ngrok.com/docs/api-reference/kubernetesoperators/list
 func (c *Client) List(paging *ngrok.Paging) ngrok.Iter[*ngrok.KubernetesOperator] {
 	if paging == nil {
 		paging = new(ngrok.Paging)
@@ -226,7 +226,7 @@ func (it *iterList) Err() error {
 
 // List Endpoints bound to a Kubernetes Operator
 //
-// https://ngrok.com/docs/api#api-kubernetes-operators-get-bound-endpoints
+// https://ngrok.com/docs/api-reference/kubernetesoperators/get-bound-endpoints
 func (c *Client) GetBoundEndpoints(id string, paging *ngrok.Paging) ngrok.Iter[*ngrok.Endpoint] {
 	arg := &ngrok.ItemPaging{ID: id}
 	if paging == nil {

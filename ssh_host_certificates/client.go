@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // SSH Host Certificates along with the corresponding private key allows an SSH
@@ -27,7 +27,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new SSH Host Certificate
 //
-// https://ngrok.com/docs/api#api-ssh-host-certificates-create
+// https://ngrok.com/docs/api-reference/sshhostcertificates/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.SSHHostCertificateCreate) (*ngrok.SSHHostCertificate, error) {
 	var res ngrok.SSHHostCertificate
 	var path bytes.Buffer
@@ -49,7 +49,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.SSHHostCertificateCreate
 
 // Delete an SSH Host Certificate
 //
-// https://ngrok.com/docs/api#api-ssh-host-certificates-delete
+// https://ngrok.com/docs/api-reference/sshhostcertificates/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -72,7 +72,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get detailed information about an SSH Host Certificate
 //
-// https://ngrok.com/docs/api#api-ssh-host-certificates-get
+// https://ngrok.com/docs/api-reference/sshhostcertificates/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.SSHHostCertificate, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -96,7 +96,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.SSHHostCertificate,
 
 // List all SSH Host Certificates issued on this account
 //
-// https://ngrok.com/docs/api#api-ssh-host-certificates-list
+// https://ngrok.com/docs/api-reference/sshhostcertificates/list
 func (c *Client) List(paging *ngrok.Paging) ngrok.Iter[*ngrok.SSHHostCertificate] {
 	if paging == nil {
 		paging = new(ngrok.Paging)
@@ -197,7 +197,7 @@ func (it *iterList) Err() error {
 
 // Update an SSH Host Certificate
 //
-// https://ngrok.com/docs/api#api-ssh-host-certificates-update
+// https://ngrok.com/docs/api-reference/sshhostcertificates/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.SSHHostCertificateUpdate) (*ngrok.SSHHostCertificate, error) {
 	if arg == nil {
 		arg = new(ngrok.SSHHostCertificateUpdate)

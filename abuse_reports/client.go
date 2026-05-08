@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // Abuse Reports allow you to submit take-down requests for URLs hosted by
@@ -28,7 +28,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 // response team. This API is only available to authorized accounts. Contact
 // abuse@ngrok.com to request access
 //
-// https://ngrok.com/docs/api#api-abuse-reports-create
+// https://ngrok.com/docs/api-reference/abusereports/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.AbuseReportCreate) (*ngrok.AbuseReport, error) {
 	var res ngrok.AbuseReport
 	var path bytes.Buffer
@@ -50,7 +50,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.AbuseReportCreate) (*ngr
 
 // Get the detailed status of abuse report by ID.
 //
-// https://ngrok.com/docs/api#api-abuse-reports-get
+// https://ngrok.com/docs/api-reference/abusereports/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.AbuseReport, error) {
 	arg := &ngrok.Item{ID: id}
 

@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // AIGatewayAPIKeys is an api service for managing API keys used to authenticate
@@ -26,7 +26,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new AI Gateway API Key
 //
-// https://ngrok.com/docs/api#api-ai-gateway-api-keys-create
+// https://ngrok.com/docs/api-reference/aigatewayapikeys/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.AIGatewayAPIKeyCreate) (*ngrok.AIGatewayAPIKey, error) {
 	var res ngrok.AIGatewayAPIKey
 	var path bytes.Buffer
@@ -48,7 +48,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.AIGatewayAPIKeyCreate) (
 
 // Update an existing AI Gateway API Key by ID
 //
-// https://ngrok.com/docs/api#api-ai-gateway-api-keys-update
+// https://ngrok.com/docs/api-reference/aigatewayapikeys/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.AIGatewayAPIKeyUpdate) (*ngrok.AIGatewayAPIKey, error) {
 	if arg == nil {
 		arg = new(ngrok.AIGatewayAPIKeyUpdate)
@@ -74,7 +74,7 @@ func (c *Client) Update(ctx context.Context, arg *ngrok.AIGatewayAPIKeyUpdate) (
 
 // Delete an AI Gateway API Key
 //
-// https://ngrok.com/docs/api#api-ai-gateway-api-keys-delete
+// https://ngrok.com/docs/api-reference/aigatewayapikeys/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -97,7 +97,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get an AI Gateway API Key by ID
 //
-// https://ngrok.com/docs/api#api-ai-gateway-api-keys-get
+// https://ngrok.com/docs/api-reference/aigatewayapikeys/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.AIGatewayAPIKey, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -121,7 +121,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.AIGatewayAPIKey, er
 
 // List all AI Gateway API Keys owned by account
 //
-// https://ngrok.com/docs/api#api-ai-gateway-api-keys-list
+// https://ngrok.com/docs/api-reference/aigatewayapikeys/list
 func (c *Client) List(paging *ngrok.Paging) ngrok.Iter[*ngrok.AIGatewayAPIKey] {
 	if paging == nil {
 		paging = new(ngrok.Paging)

@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // Tunnel Credentials are ngrok agent authtokens. They authorize the ngrok
@@ -31,7 +31,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 // the generated token is available. If you need it for future use, you must save
 // it securely yourself.
 //
-// https://ngrok.com/docs/api#api-credentials-create
+// https://ngrok.com/docs/api-reference/credentials/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.CredentialCreate) (*ngrok.Credential, error) {
 	if arg == nil {
 		arg = new(ngrok.CredentialCreate)
@@ -56,7 +56,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.CredentialCreate) (*ngro
 
 // Delete a tunnel authtoken credential by ID
 //
-// https://ngrok.com/docs/api#api-credentials-delete
+// https://ngrok.com/docs/api-reference/credentials/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -79,7 +79,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get detailed information about a tunnel authtoken credential
 //
-// https://ngrok.com/docs/api#api-credentials-get
+// https://ngrok.com/docs/api-reference/credentials/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.Credential, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -103,7 +103,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.Credential, error) 
 
 // List all tunnel authtoken credentials on this account
 //
-// https://ngrok.com/docs/api#api-credentials-list
+// https://ngrok.com/docs/api-reference/credentials/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.Credential] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)
@@ -207,7 +207,7 @@ func (it *iterList) Err() error {
 
 // Update attributes of an tunnel authtoken credential by ID
 //
-// https://ngrok.com/docs/api#api-credentials-update
+// https://ngrok.com/docs/api-reference/credentials/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.CredentialUpdate) (*ngrok.Credential, error) {
 	if arg == nil {
 		arg = new(ngrok.CredentialUpdate)

@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // Tunnels provide endpoints to access services exposed by a running ngrok
@@ -26,7 +26,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // List all online tunnels currently running on the account.
 //
-// https://ngrok.com/docs/api#api-tunnels-list
+// https://ngrok.com/docs/api-reference/tunnels/list
 func (c *Client) List(paging *ngrok.Paging) ngrok.Iter[*ngrok.Tunnel] {
 	if paging == nil {
 		paging = new(ngrok.Paging)
@@ -127,7 +127,7 @@ func (it *iterList) Err() error {
 
 // Get the status of a tunnel by ID
 //
-// https://ngrok.com/docs/api#api-tunnels-get
+// https://ngrok.com/docs/api-reference/tunnels/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.Tunnel, error) {
 	arg := &ngrok.Item{ID: id}
 

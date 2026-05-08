@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 type Client struct {
@@ -24,7 +24,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 // Create a new Event Destination. It will not apply to anything until it is
 // associated with an Event Subscription.
 //
-// https://ngrok.com/docs/api#api-event-destinations-create
+// https://ngrok.com/docs/api-reference/eventdestinations/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.EventDestinationCreate) (*ngrok.EventDestination, error) {
 	if arg == nil {
 		arg = new(ngrok.EventDestinationCreate)
@@ -50,7 +50,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.EventDestinationCreate) 
 // Delete an Event Destination. If the Event Destination is still referenced by an
 // Event Subscription.
 //
-// https://ngrok.com/docs/api#api-event-destinations-delete
+// https://ngrok.com/docs/api-reference/eventdestinations/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -73,7 +73,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get detailed information about an Event Destination by ID.
 //
-// https://ngrok.com/docs/api#api-event-destinations-get
+// https://ngrok.com/docs/api-reference/eventdestinations/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.EventDestination, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -97,7 +97,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.EventDestination, e
 
 // List all Event Destinations on this account.
 //
-// https://ngrok.com/docs/api#api-event-destinations-list
+// https://ngrok.com/docs/api-reference/eventdestinations/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.EventDestination] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)
@@ -201,7 +201,7 @@ func (it *iterList) Err() error {
 
 // Update attributes of an Event Destination.
 //
-// https://ngrok.com/docs/api#api-event-destinations-update
+// https://ngrok.com/docs/api-reference/eventdestinations/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.EventDestinationUpdate) (*ngrok.EventDestination, error) {
 	if arg == nil {
 		arg = new(ngrok.EventDestinationUpdate)

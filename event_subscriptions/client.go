@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 type Client struct {
@@ -23,7 +23,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create an Event Subscription.
 //
-// https://ngrok.com/docs/api#api-event-subscriptions-create
+// https://ngrok.com/docs/api-reference/eventsubscriptions/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.EventSubscriptionCreate) (*ngrok.EventSubscription, error) {
 	if arg == nil {
 		arg = new(ngrok.EventSubscriptionCreate)
@@ -48,7 +48,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.EventSubscriptionCreate)
 
 // Delete an Event Subscription.
 //
-// https://ngrok.com/docs/api#api-event-subscriptions-delete
+// https://ngrok.com/docs/api-reference/eventsubscriptions/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -71,7 +71,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get an Event Subscription by ID.
 //
-// https://ngrok.com/docs/api#api-event-subscriptions-get
+// https://ngrok.com/docs/api-reference/eventsubscriptions/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.EventSubscription, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -95,7 +95,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.EventSubscription, 
 
 // List this Account's Event Subscriptions.
 //
-// https://ngrok.com/docs/api#api-event-subscriptions-list
+// https://ngrok.com/docs/api-reference/eventsubscriptions/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.EventSubscription] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)
@@ -199,7 +199,7 @@ func (it *iterList) Err() error {
 
 // Update an Event Subscription.
 //
-// https://ngrok.com/docs/api#api-event-subscriptions-update
+// https://ngrok.com/docs/api-reference/eventsubscriptions/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.EventSubscriptionUpdate) (*ngrok.EventSubscription, error) {
 	if arg == nil {
 		arg = new(ngrok.EventSubscriptionUpdate)

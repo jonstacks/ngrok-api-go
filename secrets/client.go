@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // Secrets is an api service for securely storing and managing sensitive data such
@@ -26,7 +26,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new Secret
 //
-// https://ngrok.com/docs/api#api-secrets-create
+// https://ngrok.com/docs/api-reference/secrets/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.SecretCreate) (*ngrok.Secret, error) {
 	if arg == nil {
 		arg = new(ngrok.SecretCreate)
@@ -51,7 +51,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.SecretCreate) (*ngrok.Se
 
 // Update an existing Secret by ID
 //
-// https://ngrok.com/docs/api#api-secrets-update
+// https://ngrok.com/docs/api-reference/secrets/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.SecretUpdate) (*ngrok.Secret, error) {
 	if arg == nil {
 		arg = new(ngrok.SecretUpdate)
@@ -77,7 +77,7 @@ func (c *Client) Update(ctx context.Context, arg *ngrok.SecretUpdate) (*ngrok.Se
 
 // Delete a Secret
 //
-// https://ngrok.com/docs/api#api-secrets-delete
+// https://ngrok.com/docs/api-reference/secrets/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -100,7 +100,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get a Secret by ID
 //
-// https://ngrok.com/docs/api#api-secrets-get
+// https://ngrok.com/docs/api-reference/secrets/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.Secret, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -124,7 +124,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.Secret, error) {
 
 // List all Secrets owned by account
 //
-// https://ngrok.com/docs/api#api-secrets-list
+// https://ngrok.com/docs/api-reference/secrets/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.Secret] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)

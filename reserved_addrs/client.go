@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // Reserved Addresses are TCP addresses that can be used to listen for traffic.
@@ -27,7 +27,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new reserved address.
 //
-// https://ngrok.com/docs/api#api-reserved-addrs-create
+// https://ngrok.com/docs/api-reference/reservedaddrs/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.ReservedAddrCreate) (*ngrok.ReservedAddr, error) {
 	if arg == nil {
 		arg = new(ngrok.ReservedAddrCreate)
@@ -52,7 +52,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.ReservedAddrCreate) (*ng
 
 // Delete a reserved address.
 //
-// https://ngrok.com/docs/api#api-reserved-addrs-delete
+// https://ngrok.com/docs/api-reference/reservedaddrs/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -75,7 +75,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get the details of a reserved address.
 //
-// https://ngrok.com/docs/api#api-reserved-addrs-get
+// https://ngrok.com/docs/api-reference/reservedaddrs/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.ReservedAddr, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -99,7 +99,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.ReservedAddr, error
 
 // List all reserved addresses on this account.
 //
-// https://ngrok.com/docs/api#api-reserved-addrs-list
+// https://ngrok.com/docs/api-reference/reservedaddrs/list
 func (c *Client) List(paging *ngrok.FilteredPaging) ngrok.Iter[*ngrok.ReservedAddr] {
 	if paging == nil {
 		paging = new(ngrok.FilteredPaging)
@@ -203,7 +203,7 @@ func (it *iterList) Err() error {
 
 // Update the attributes of a reserved address.
 //
-// https://ngrok.com/docs/api#api-reserved-addrs-update
+// https://ngrok.com/docs/api-reference/reservedaddrs/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.ReservedAddrUpdate) (*ngrok.ReservedAddr, error) {
 	if arg == nil {
 		arg = new(ngrok.ReservedAddrUpdate)

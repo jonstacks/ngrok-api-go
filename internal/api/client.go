@@ -2,7 +2,7 @@
 
 package api
 
-import "github.com/ngrok/ngrok-api-go/v8"
+import "github.com/ngrok/ngrok-api-go/v9"
 
 type Client = ngrok.BaseClient
 

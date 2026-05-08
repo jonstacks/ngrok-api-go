@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 // A static backend sends traffic to a TCP address (hostname and port) that
@@ -26,7 +26,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new static backend
 //
-// https://ngrok.com/docs/api#api-static-backends-create
+// https://ngrok.com/docs/api-reference/staticbackends/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.StaticBackendCreate) (*ngrok.StaticBackend, error) {
 	if arg == nil {
 		arg = new(ngrok.StaticBackendCreate)
@@ -51,7 +51,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.StaticBackendCreate) (*n
 
 // Delete a static backend by ID.
 //
-// https://ngrok.com/docs/api#api-static-backends-delete
+// https://ngrok.com/docs/api-reference/staticbackends/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -74,7 +74,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get detailed information about a static backend by ID
 //
-// https://ngrok.com/docs/api#api-static-backends-get
+// https://ngrok.com/docs/api-reference/staticbackends/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.StaticBackend, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -98,7 +98,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.StaticBackend, erro
 
 // List all static backends on this account
 //
-// https://ngrok.com/docs/api#api-static-backends-list
+// https://ngrok.com/docs/api-reference/staticbackends/list
 func (c *Client) List(paging *ngrok.Paging) ngrok.Iter[*ngrok.StaticBackend] {
 	if paging == nil {
 		paging = new(ngrok.Paging)
@@ -199,7 +199,7 @@ func (it *iterList) Err() error {
 
 // Update static backend by ID
 //
-// https://ngrok.com/docs/api#api-static-backends-update
+// https://ngrok.com/docs/api-reference/staticbackends/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.StaticBackendUpdate) (*ngrok.StaticBackend, error) {
 	if arg == nil {
 		arg = new(ngrok.StaticBackendUpdate)

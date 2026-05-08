@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"text/template"
 
-	"github.com/ngrok/ngrok-api-go/v8"
-	"github.com/ngrok/ngrok-api-go/v8/internal/api"
+	"github.com/ngrok/ngrok-api-go/v9"
+	"github.com/ngrok/ngrok-api-go/v9/internal/api"
 )
 
 type Client struct {
@@ -23,7 +23,7 @@ func NewClient(cfg *ngrok.ClientConfig) *Client {
 
 // Create a new bot user
 //
-// https://ngrok.com/docs/api#api-bot-users-create
+// https://ngrok.com/docs/api-reference/botusers/create
 func (c *Client) Create(ctx context.Context, arg *ngrok.BotUserCreate) (*ngrok.BotUser, error) {
 	if arg == nil {
 		arg = new(ngrok.BotUserCreate)
@@ -48,7 +48,7 @@ func (c *Client) Create(ctx context.Context, arg *ngrok.BotUserCreate) (*ngrok.B
 
 // Delete a bot user by ID
 //
-// https://ngrok.com/docs/api#api-bot-users-delete
+// https://ngrok.com/docs/api-reference/botusers/delete
 func (c *Client) Delete(ctx context.Context, id string) error {
 	arg := &ngrok.Item{ID: id}
 
@@ -71,7 +71,7 @@ func (c *Client) Delete(ctx context.Context, id string) error {
 
 // Get the details of a Bot User by ID.
 //
-// https://ngrok.com/docs/api#api-bot-users-get
+// https://ngrok.com/docs/api-reference/botusers/get
 func (c *Client) Get(ctx context.Context, id string) (*ngrok.BotUser, error) {
 	arg := &ngrok.Item{ID: id}
 
@@ -95,7 +95,7 @@ func (c *Client) Get(ctx context.Context, id string) (*ngrok.BotUser, error) {
 
 // List all bot users in this account.
 //
-// https://ngrok.com/docs/api#api-bot-users-list
+// https://ngrok.com/docs/api-reference/botusers/list
 func (c *Client) List(paging *ngrok.Paging) ngrok.Iter[*ngrok.BotUser] {
 	if paging == nil {
 		paging = new(ngrok.Paging)
@@ -196,7 +196,7 @@ func (it *iterList) Err() error {
 
 // Update attributes of a bot user by ID.
 //
-// https://ngrok.com/docs/api#api-bot-users-update
+// https://ngrok.com/docs/api-reference/botusers/update
 func (c *Client) Update(ctx context.Context, arg *ngrok.BotUserUpdate) (*ngrok.BotUser, error) {
 	if arg == nil {
 		arg = new(ngrok.BotUserUpdate)
